@@ -1,0 +1,12 @@
+.category-link {
+    text-decoration: none;
+    color:rgba(0,0,0,.55);
+}
+
+.category-link:hover {
+    color:rgba(0,0,0,.55);
+}
+
+.hover-effect {
+    transition:0.5s ease;
+}
