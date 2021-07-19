@@ -19,7 +19,7 @@ const NavigationBar = () => {
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
                     <NavDropdown title="zahid rahman" id="basic-nav-dropdown">
-                        <Link to="/" className="dropdown-item">Create post</Link>
+                        <Link to="/post/create" className="dropdown-item">Create post</Link>
                         <Link to="/" className="dropdown-item">View all posts</Link>
                         <Link to="/" className="dropdown-item">View profile</Link>
                         <Link to="/" className="dropdown-item"> logout</Link>
