@@ -1,9 +1,10 @@
 import React from 'react'
+import Cotnact from '../../components/contact/Contact'
 
 const ContactPage = () => {
     return (
         <>
-            <h1>Contact</h1>
+            <Cotnact></Cotnact>
         </>
     )
 }
