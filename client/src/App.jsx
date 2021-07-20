@@ -6,6 +6,7 @@ import ContactPage from './pages/contact/ContactPage'
 import HomePage from "./pages/home/HomePage"
 import CreatePostPage from './pages/post/CreatePostPage'
 import { changeSiteName } from './actions/index'
+import LoginPage from './pages/home/LoginPage'
 
 
 const App = () => {
@@ -32,6 +33,10 @@ const App = () => {
 
           <Route path="/contact" exact>
             <ContactPage />
+          </Route>
+
+          <Route path="/login" exact>
+            <LoginPage />
           </Route>
 
 
