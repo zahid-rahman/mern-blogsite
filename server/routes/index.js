@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const userRouter = require('./user.js')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,5 +9,8 @@ router.get('/', function(req, res, next) {
     message: "Blogsite api"
   })
 });
+
+
+router.use('/user',userRouter);
 
 module.exports = router;
