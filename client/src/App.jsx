@@ -7,6 +7,7 @@ import HomePage from "./pages/home/HomePage"
 import CreatePostPage from './pages/post/CreatePostPage'
 import { changeSiteName } from './actions/index'
 import LoginPage from './pages/home/LoginPage'
+import SignUpPage from './pages/home/SignUpPage'
 
 
 const App = () => {
@@ -39,6 +40,9 @@ const App = () => {
             <LoginPage />
           </Route>
 
+          <Route path="/signup" exact>
+            <SignUpPage />
+          </Route>
 
           <Route path="/post/create">
             <CreatePostPage></CreatePostPage>
