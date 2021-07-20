@@ -7,7 +7,7 @@ const Title = ({ pageTitle }) => {
     return (
         <>
             <Helmet>
-                <title>{siteTitle}-{pageTitle}</title>
+                <title>{siteTitle.toString()}-{pageTitle}</title>
             </Helmet>
         </>
     )

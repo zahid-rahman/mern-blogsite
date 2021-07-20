@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 
+// store.subscribe(() => console.log(store));
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
