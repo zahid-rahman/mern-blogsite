@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import PageTitle from '../../components/head-title/PageTitle'
 
 const SignUpPage = () => {
 
@@ -11,6 +12,7 @@ const SignUpPage = () => {
 
     return (
         <Container>
+            <PageTitle pageTitle="Sign Up" />
             <Row>
                 <Col xl={bigScreenCustomSize} lg={bigScreenCustomSize} md={12} sm={12} xs={12}>
                     <h1 className="text-center p-5">
