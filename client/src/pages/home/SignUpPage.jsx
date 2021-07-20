@@ -18,20 +18,41 @@ const SignUpPage = () => {
                     </h1>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control 
+                                name="email" 
+                                type="email" 
+                                placeholder="Enter email" 
+                            />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter national id" />
+                            <Form.Control 
+                                name="nid" 
+                                type="text" 
+                                placeholder="Enter national id" 
+                            />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control 
+                                name="password" 
+                                type="password" 
+                                placeholder="Password" 
+                            />
                         </Form.Group>
+
+                        <Form.Group  className="mb-3" controlId="formBasicPassword">
+                            <Form.Control 
+                                name="confirmPassword" 
+                                type="password" 
+                                placeholder="confirm password" 
+                            />
+                        </Form.Group>
+
 
                         <Form.Group className="mb-3 text-center" controlId="formBasicCheckbox">
                             <Link to='/' className="btn btn-link">back to homepage</Link>
-                            <Link to='/signup' className="btn btn-link">Not registered yet</Link>
+                            <Link to='/login' className="btn btn-link">Already have an account</Link>
                         </Form.Group>
 
                         <Button variant="primary" type="submit" className="w-100">
