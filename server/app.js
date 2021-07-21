@@ -24,22 +24,20 @@ app.use('/api', indexRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-console.log('connection',DATABASE_CONNECTION_URI)
-mongoose.connect(DATABASE_CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true});
+mongoose.connect(DATABASE_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
+db.once('open', function () {
   console.log('database connected')
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
