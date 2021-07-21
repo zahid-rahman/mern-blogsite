@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 });
 
 console.log('connection',DATABASE_CONNECTION_URI)
-mongoose.connect(DATABASE_CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(DATABASE_CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
