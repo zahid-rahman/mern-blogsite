@@ -7,12 +7,16 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const passport = require('passport');
 
 const app = express();
 dotenv.config();
 const DATABASE_CONNECTION_URI = process.env.CONNECTION_STRING
 
 app.use(cors());
+
+app.use(passport.initialize())
+require('./authentication/auth')(passport);
 
 app.use(logger('dev'));
 app.use(express.json());

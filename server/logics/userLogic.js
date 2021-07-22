@@ -24,7 +24,7 @@ const userLogin = async (payload) => {
                 expiresIn: '1h'
             })
 
-            return Promise.resolve(token)
+            return Promise.resolve(`Bearer ${token}`)
         }
         else {
             return Promise.reject('')
@@ -36,3 +36,11 @@ const userLogin = async (payload) => {
 }
 
 exports.userLogin = userLogin;
+
+
+const findAllUser = async () => {
+    const users = await User.find()
+    return users;
+}
+
+exports.findAllUser = findAllUser;

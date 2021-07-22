@@ -5,6 +5,8 @@ const loginValidation = require('./../validation/loginValidation');
 const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
 
+const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware')
+
 router.post('/signup', async (req, res) => {
 
     const validation = signupValidation(req.body);
@@ -22,7 +24,7 @@ router.post('/signup', async (req, res) => {
                 message: "New user created successfully"
             })
         }
-        catch(error) {
+        catch (error) {
             console.error(error)
             res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
                 message: "Something went wrong"
@@ -35,10 +37,10 @@ router.post('/login', async (req, res) => {
 
     const validation = loginValidation(req.body);
     console.log(validation.isValid)
-    if(validation.isValid === false) {
+    if (validation.isValid === false) {
         return res.status(httpStatus.BAD_REQUEST).json(validation.error)
     }
-    else if(validation.isValid === true) {
+    else if (validation.isValid === true) {
         try {
             const token = await userLogic.userLogin(req.body)
             res.status(httpStatus.OK).json({
@@ -47,12 +49,26 @@ router.post('/login', async (req, res) => {
             })
         }
         catch (error) {
-            console.error(error)
+            console.error(error);
             res.status(httpStatus.UNAUTHORIZED).json({
                 message: "Authentication failed !!"
             })
         }
-    }  
+    }
+})
+
+router.get('/list', bloggerMiddleware , async (req, res) => {
+    console.log(req.header.authorization)
+    try {
+        const users = await userLogic.findAllUser();
+        res.status(httpStatus.OK).json(users)
+    }
+    catch (error) {
+        console.error(error);
+        res.status(httpStatus.UNAUTHORIZED).json({
+            message: "Authentication failed !!"
+        })
+    }
 })
 
 module.exports = router;
