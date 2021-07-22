@@ -1,11 +1,10 @@
 const validator = require('validator');
 
 const signupValidation = (userRequest) => {
-    console.log(userRequest);
     const error = {};
 
     if (validator.isEmpty(userRequest.username)) {
-        error.nid = "provide a user name"
+        error.username = "provide a user name"
     }
     if (!validator.isEmail(userRequest.email)) {
         error.email = "provide a valid email"
@@ -29,11 +28,11 @@ const signupValidation = (userRequest) => {
         error.confirmPassword = "password doesn't matched"
     }
 
-    const isValidation = Object.keys(error).length === 0 ? true : false
+    const isValid = Object.keys(error).length === 0 ? true : false
 
     return {
         error,
-        isValidation
+        isValid
     }
 }
 
