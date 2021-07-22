@@ -24,6 +24,9 @@ const signupValidation = (userRequest) => {
     if (!validator.isLength(userRequest.password, { min: 8 })) {
         error.password = "use maximum 8 length of your password"
     }
+    if (validator.isEmpty(userRequest.confirmPassword)) {
+        error.confirmPassword = "please provide a confirm password"
+    }
     if (!validator.equals(userRequest.confirmPassword, userRequest.password)) {
         error.confirmPassword = "password doesn't matched"
     }
