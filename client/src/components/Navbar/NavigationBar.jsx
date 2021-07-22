@@ -22,12 +22,16 @@ const NavigationBar = () => {
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
-                    <NavDropdown title="zahid rahman" id="basic-nav-dropdown">
+                    {/* <NavDropdown title="zahid rahman" id="basic-nav-dropdown">
                         <Link to="/post/create" className="dropdown-item">Create post</Link>
                         <Link to="/" className="dropdown-item">View all posts</Link>
                         <Link to="/" className="dropdown-item">View profile</Link>
                         <Link to="/" className="dropdown-item"> logout</Link>
-                    </NavDropdown>
+                    </NavDropdown> */}
+                    <Nav>
+                        <Link to='/signup' className="nav-link">Sign Up</Link>
+                        <Link to='/login' className="nav-link">Login</Link>
+                    </Nav>
                 </Navbar.Collapse>
 
             </Container>
