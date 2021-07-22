@@ -58,7 +58,6 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/list', bloggerMiddleware , async (req, res) => {
-    console.log(req.header.authorization)
     try {
         const users = await userLogic.findAllUser();
         res.status(httpStatus.OK).json(users)
