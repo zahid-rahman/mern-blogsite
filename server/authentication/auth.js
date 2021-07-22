@@ -7,7 +7,7 @@ opts.jwtFromRequest = ExactJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET;
 
 module.exports = (passport) => {
-    passport.use(new JwtStrategy(opts, async (payload, done) => {
+    passport.use(new JwtStrategy(opts, (payload, done) => {
         User.findOne({
             email: payload.email,
         })
