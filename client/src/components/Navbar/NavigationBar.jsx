@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavigationBar.css'
 import { Link, useHistory } from 'react-router-dom';
-import { getCookie, removeCookie } from '../../utils/loginSession';
+import { getCookie, removeEverythindAfterLogout } from '../../utils/loginSession';
 
 const NavigationBar = () => {
 
@@ -12,7 +12,7 @@ const NavigationBar = () => {
     const history = useHistory()
 
     const logoutHandler = () => {
-        removeCookie()
+        removeEverythindAfterLogout()
         history.push('/login')
     }
 

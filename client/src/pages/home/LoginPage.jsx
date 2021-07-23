@@ -1,12 +1,16 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+// import { saveUserDetailsAfterLogin } from '../../actions'
 import PageTitle from '../../components/head-title/PageTitle'
-import { setCookie } from '../../utils/loginSession'
+import { setUserDetails, setCookie } from '../../utils/loginSession'
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API
 
 const LoginPage = () => {
+
+    const dispatch = useDispatch()
     const [userRequest, setUserRequest] = useState({
         email: "",
         password: ""
@@ -15,6 +19,7 @@ const LoginPage = () => {
     const [alertVisible, setAlertVisible] = useState(false)
     const [statusCode, setStatusCode] = useState(0)
     const history = useHistory()
+
     const bigScreenCustomSize = {
         span: 4,
         offset: 4
@@ -41,9 +46,9 @@ const LoginPage = () => {
         event.preventDefault()
         try {
             const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
-            console.log(response.data)
             setCookie(response.data)
-            history.push('/dashboard')
+            setUserDetails()
+            history.push('/user/profile')
 
         }
         catch (error) {

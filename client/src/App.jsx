@@ -9,16 +9,18 @@ import { changeSiteName } from './actions/index'
 import LoginPage from './pages/home/LoginPage'
 import SignUpPage from './pages/home/SignUpPage'
 import PrivateRoute from './components/custom-routes/PrivateRoute'
-import Dashboard from './components/user/Dashboard'
+import ProfilePage from './pages/user/ProfilePage'
 import PublicRoute from './components/custom-routes/PublicRoute'
-import Logout from './components/user/Logout'
-
+import { saveUserDetailsAfterLogin } from './actions/index'
+import { getUserDetails } from './utils/loginSession'
 
 const App = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(changeSiteName('ZR blog'))
+    const userDetails = getUserDetails()
+    dispatch(saveUserDetailsAfterLogin(userDetails))
   }, []);
 
 
@@ -50,11 +52,8 @@ const App = () => {
             <CreatePostPage></CreatePostPage>
           </Route>
 
-          <PrivateRoute path="/dashboard" exact component={Dashboard}>
+          <PrivateRoute path="/user/profile" exact component={ProfilePage}>
           </PrivateRoute>
-
-          <PrivateRoute path="/logout" exact component={Logout} />
-          
 
         </Switch>
       </BrowserRouter>

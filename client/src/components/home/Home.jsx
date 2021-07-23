@@ -7,8 +7,6 @@ import Title from '../title/Title'
 import SiteLayout from '../layout/SiteLayout'
 
 const Home = () => {
-
-
     const renderHomePageDesign = () => {
         return (
             <>
