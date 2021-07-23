@@ -8,6 +8,10 @@ import CreatePostPage from './pages/post/CreatePostPage'
 import { changeSiteName } from './actions/index'
 import LoginPage from './pages/home/LoginPage'
 import SignUpPage from './pages/home/SignUpPage'
+import PrivateRoute from './components/custom-routes/PrivateRoute'
+import Dashboard from './components/user/Dashboard'
+import PublicRoute from './components/custom-routes/PublicRoute'
+import Logout from './components/user/Logout'
 
 
 const App = () => {
@@ -36,17 +40,22 @@ const App = () => {
             <ContactPage />
           </Route>
 
-          <Route path="/login" exact>
-            <LoginPage />
-          </Route>
+          <PublicRoute path="/login" exact component={LoginPage}>
+          </PublicRoute>
 
-          <Route path="/signup" exact>
-            <SignUpPage />
-          </Route>
+          <PublicRoute path="/signup" exact component={SignUpPage}>
+          </PublicRoute>
 
           <Route path="/post/create">
             <CreatePostPage></CreatePostPage>
           </Route>
+
+          <PrivateRoute path="/dashboard" exact component={Dashboard}>
+          </PrivateRoute>
+
+          <PrivateRoute path="/logout" exact component={Logout} />
+          
+
         </Switch>
       </BrowserRouter>
     </div>
