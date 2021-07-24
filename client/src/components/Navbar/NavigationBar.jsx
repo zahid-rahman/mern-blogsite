@@ -7,6 +7,7 @@ import { getCookie, removeEverythindAfterLogout } from '../../utils/loginSession
 
 const NavigationBar = () => {
 
+    const loggedUserDetails = useSelector(state => state.loggedUserDetails)
     const siteTitle = useSelector(state => state.siteTitle)
     const cookie = getCookie()
     const history = useHistory()
@@ -33,10 +34,10 @@ const NavigationBar = () => {
                 <Navbar.Collapse className="justify-content-end">
 
                     {cookie ?
-                        <NavDropdown title="zahid rahman" id="basic-nav-dropdown">
+                        <NavDropdown title={loggedUserDetails.username} id="basic-nav-dropdown">
                             <Link to="/post/create" className="dropdown-item">Create post</Link>
                             <Link to="/" className="dropdown-item">View all posts</Link>
-                            <Link to="/" className="dropdown-item">View profile</Link>
+                            <Link to="/user/profile" className="dropdown-item">View profile</Link>
                             <Link onClick={logoutHandler} className="dropdown-item"> logout</Link>
                         </NavDropdown>
 
@@ -47,7 +48,6 @@ const NavigationBar = () => {
                         </Nav>
 
                     }
-
 
                 </Navbar.Collapse>
 
