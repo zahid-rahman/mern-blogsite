@@ -6,7 +6,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     const privateRouteFunction = (props) => {
         return !getCookie() ? <Component {...props} /> :
-            <Redirect to={{ pathname: '/dashboard', state: { from: props.location } }} />
+            <Redirect to={{ pathname: '/user/profile', state: { from: props.location } }} />
     }
 
     return (
