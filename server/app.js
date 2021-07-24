@@ -3,15 +3,20 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const cors = require('cors');
 const indexRouter = require('./routes/index');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const passport = require('passport');
 
 const app = express();
+dotenv.config();
+const DATABASE_CONNECTION_URI = process.env.CONNECTION_STRING
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.use(cors());
+
+app.use(passport.initialize())
+require('./authentication/auth')(passport);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,21 +28,20 @@ app.use('/api', indexRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-mongoose.connect('mongodb://localhost:27017/blog', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(DATABASE_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
+db.once('open', function () {
   console.log('database connected')
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

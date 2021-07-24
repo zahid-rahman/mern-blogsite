@@ -8,6 +8,7 @@ import store from './store'
 
 
 // store.subscribe(() => console.log(store));
+store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
   <React.StrictMode>

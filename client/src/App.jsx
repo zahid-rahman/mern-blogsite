@@ -6,13 +6,24 @@ import ContactPage from './pages/contact/ContactPage'
 import HomePage from "./pages/home/HomePage"
 import CreatePostPage from './pages/post/CreatePostPage'
 import { changeSiteName } from './actions/index'
-
+import LoginPage from './pages/home/LoginPage'
+import SignUpPage from './pages/home/SignUpPage'
+import PrivateRoute from './components/custom-routes/PrivateRoute'
+import ProfilePage from './pages/user/ProfilePage'
+import PublicRoute from './components/custom-routes/PublicRoute'
+import { saveUserDetailsAfterLogin } from './actions/index'
+import { getUserDetails } from './utils/loginSession'
 
 const App = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    console.log('component called')
+    // eslint-disable-next-line
     dispatch(changeSiteName('ZR blog'))
+    const userDetails = getUserDetails()
+    // eslint-disable-next-line 
+    dispatch(saveUserDetailsAfterLogin(userDetails))
   }, []);
 
 
@@ -34,10 +45,19 @@ const App = () => {
             <ContactPage />
           </Route>
 
+          <PublicRoute path="/login" exact component={LoginPage}>
+          </PublicRoute>
+
+          <PublicRoute path="/signup" exact component={SignUpPage}>
+          </PublicRoute>
 
           <Route path="/post/create">
             <CreatePostPage></CreatePostPage>
           </Route>
+
+          <PrivateRoute path="/user/profile" exact component={ProfilePage}>
+          </PrivateRoute>
+
         </Switch>
       </BrowserRouter>
     </div>
