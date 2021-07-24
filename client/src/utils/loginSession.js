@@ -30,7 +30,6 @@ export const setUserDetails = () => {
         const token = getToken();
         const decodeUserData = decode(token);
         cookie.set('USER_DATA',decodeUserData)
-        console.log('finished   ')
     }
     return;
 }
@@ -39,17 +38,17 @@ export const setUserDetails = () => {
 export const getUserDetails = () => {
     if(getCookie()) {
         const userData = JSON.parse(cookie.get('USER_DATA'));
-        console.log(userData)
         return userData
     } 
     return null;
 }
 
 export const removeUserDetails = () => {
-    cookie.remove('USER_DATA')
+    cookie.remove('USER_DATA');
 }
 
 export const removeEverythindAfterLogout = () => {
-    removeCookie()
-    removeUserDetails()
+    removeCookie();
+    removeUserDetails();
+    window.location.href = "/login";
 }

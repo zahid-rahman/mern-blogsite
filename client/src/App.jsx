@@ -18,8 +18,11 @@ const App = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    console.log('component called')
+    // eslint-disable-next-line
     dispatch(changeSiteName('ZR blog'))
     const userDetails = getUserDetails()
+    // eslint-disable-next-line 
     dispatch(saveUserDetailsAfterLogin(userDetails))
   }, []);
 

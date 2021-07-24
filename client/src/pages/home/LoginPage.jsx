@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 // import { saveUserDetailsAfterLogin } from '../../actions'
 import PageTitle from '../../components/head-title/PageTitle'
@@ -10,7 +9,6 @@ const SERVER_API_URL = process.env.REACT_APP_SERVER_API
 
 const LoginPage = () => {
 
-    const dispatch = useDispatch()
     const [userRequest, setUserRequest] = useState({
         email: "",
         password: ""
@@ -49,6 +47,7 @@ const LoginPage = () => {
             setCookie(response.data)
             setUserDetails()
             history.push('/user/profile')
+            // window.location.href = '/user/profile'
 
         }
         catch (error) {
