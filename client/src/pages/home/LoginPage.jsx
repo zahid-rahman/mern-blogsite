@@ -44,9 +44,7 @@ const LoginPage = () => {
             const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
             setCookie(response.data)
             setUserDetails()
-            // history.push('/user/profile')
             window.location.href = '/user/profile'
-
         }
         catch (error) {
             console.error(error)
@@ -101,7 +99,6 @@ const LoginPage = () => {
                         <Alert variant="danger" show={alertVisible} className="text-center p-3"><b>wrong email and password</b></Alert>
                         : ""
                     }
-
                 </Col>
             </Row>
         </Container>

@@ -25,7 +25,6 @@ const DashboardLayout = ({ pageContent }) => {
                 {/* Top navigation*/}
                 <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div className="container-fluid">
-
                         {!isToggled ?
                             <button className="btn btn-dark" id="sidebarToggle" onClick={openToggle} style={{ color: "#fff" }}>
                                 <i class="fas fa-bars"></i>
@@ -35,13 +34,7 @@ const DashboardLayout = ({ pageContent }) => {
                                 <i class="fas fa-bars"></i>
                             </button>
                         }
-
-
-                 
-
-
                         <DashboardNav />
-
                     </div>
                 </nav>
                 {/* Page content*/}

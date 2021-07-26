@@ -47,7 +47,6 @@ const ProfilePage = () => {
                                     <CardContent title="total orders" content={demoCardContent} />
                                     <CardContent title="total orders" content={demoCardContent} />
 
-
                                     <CardContent title="total orders" content={demoCardContent} />
                                     <CardContent title="total orders" content={demoCardContent} />
                                     <CardContent title="total orders" content={demoCardContent} />
