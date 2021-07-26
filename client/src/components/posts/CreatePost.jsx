@@ -1,12 +1,10 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import SiteLayout from '../layout/SiteLayout'
+
 const CreatePost = () => {
-
-    const rednerCreatePostPageContent = () => {
-        return (
+    return (
+        <>
             <Container className="p-5">
-
                 <Row>
                     <Col lg={8}>
                         <h1 className="mt-5 mb-5">Create Post</h1>
@@ -33,12 +31,6 @@ const CreatePost = () => {
                     </Col>
                 </Row>
             </Container>
-        )
-    }
-
-    return (
-        <>
-            <SiteLayout siteContent={rednerCreatePostPageContent}></SiteLayout>
         </>
     )
 }

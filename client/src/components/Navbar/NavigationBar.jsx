@@ -35,9 +35,9 @@ const NavigationBar = () => {
 
                     {cookie ?
                         <NavDropdown title={loggedUserDetails.username} id="basic-nav-dropdown">
+                            <Link to="/user/profile" className="dropdown-item">View profile</Link>
                             <Link to="/post/create" className="dropdown-item">Create post</Link>
                             <Link to="/" className="dropdown-item">View all posts</Link>
-                            <Link to="/user/profile" className="dropdown-item">View profile</Link>
                             <Link onClick={logoutHandler} className="dropdown-item"> logout</Link>
                         </NavDropdown>
 

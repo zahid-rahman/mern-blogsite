@@ -2,13 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-// import { saveUserDetailsAfterLogin } from '../../actions'
 import PageTitle from '../../components/head-title/PageTitle'
 import { setUserDetails, setCookie } from '../../utils/loginSession'
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API
 
 const LoginPage = () => {
-
     const [userRequest, setUserRequest] = useState({
         email: "",
         password: ""
