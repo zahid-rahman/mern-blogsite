@@ -7,7 +7,7 @@ const CreatePost = () => {
             <Container className="p-5">
                 <Row>
                     <Col lg={8}>
-                        <h1 className="mt-5 mb-5">Create Post</h1>
+                        <h1 className="mb-4">Create Post</h1>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Control type="email" placeholder="Enter Title" />
