@@ -7,6 +7,7 @@ import { getUserDetails } from '../../utils/loginSession'
 import profileImages from './../../images/profile_images.jpeg'
 import './ProfilePage.css'
 import DashboardLayout from '../../components/layout/DashboardLayout'
+import CardContent from '../../components/user/CardContent'
 
 const ProfilePage = () => {
     const dispatch = useDispatch()
@@ -15,9 +16,18 @@ const ProfilePage = () => {
         dispatch(saveUserDetailsAfterLogin(userDetails))
     }, [])
 
+    const demoCardContent = () => {
+        return (
+            <>
+                <h2>1</h2>
+                <div className="btn btn-warning">view</div>
+            </>
+        )
+    }
+
     const profilePageContent = () => {
         return (
-            <Container>
+            <Container className="p-2">
                 <Row>
                     <Col xl={3} lg={3} md={3} sm={12} xs={12}>
                         <Card body>
@@ -28,53 +38,20 @@ const ProfilePage = () => {
                     </Col>
                     <Col xl={9} lg={9} md={9} sm={12} xs={12}>
                         <Card className="text-center">
-                            <Card.Header>Profile Information</Card.Header>
+                            <Card.Header>
+                                <b>Profile Information</b>
+                            </Card.Header>
                             <Card.Body>
                                 <Row>
-                                    <Col xl={6} lg={6} md={6} sm={12} xs={12}>
-                                        <Card
-                                            style={{ width: '18rem' }}
-                                            className="card bg-dark mb-2 text-white"
-                                        >
-                                            <Card.Body>
-                                                <Card.Title>Total orders</Card.Title>
-                                                <Card.Text>
-                                                    <h2>1</h2>
-                                                    <div className="btn btn-warning">view</div>
-                                                </Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
+                                    <CardContent title="total orders" content={demoCardContent} />
+                                    <CardContent title="total orders" content={demoCardContent} />
+                                    <CardContent title="total orders" content={demoCardContent} />
 
-                                    <Col xl={6} lg={6} md={6} sm={12} xs={12}>
-                                        <Card
-                                            style={{ width: '18rem' }}
-                                            className="card bg-dark mb-2 text-white"
-                                        >
-                                            <Card.Body>
-                                                <Card.Title>Total orders</Card.Title>
-                                                <Card.Text>
-                                                    <h2>1</h2>
-                                                    <div className="btn btn-warning">view</div>
-                                                </Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
 
-                                    <Col xl={6} lg={6} md={6} sm={12} xs={12}>
-                                        <Card
-                                            style={{ width: '18rem' }}
-                                            className="card bg-dark mb-2 text-white"
-                                        >
-                                            <Card.Body>
-                                                <Card.Title>Total orders</Card.Title>
-                                                <Card.Text>
-                                                    <h2>1</h2>
-                                                    <div className="btn btn-warning">view</div>
-                                                </Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
+                                    <CardContent title="total orders" content={demoCardContent} />
+                                    <CardContent title="total orders" content={demoCardContent} />
+                                    <CardContent title="total orders" content={demoCardContent} />
+
                                 </Row>
                             </Card.Body>
                         </Card>
@@ -84,11 +61,8 @@ const ProfilePage = () => {
         )
     }
 
-
-
-
     return (
-        <DashboardLayout />
+        <DashboardLayout pageContent={profilePageContent} />
     )
 }
 

@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import DashboardNav from '../Navbar/DashboardNav'
 import Sidebar from '../sidebar/Sidebar'
 import './DashboardLayout.css'
+import sidebarLinks from './../../links/sidebar/bloggerLinks.json'
 
-const DashboardLayout = ({ pageContent, sidebarContent, navLinkContent }) => {
+const DashboardLayout = ({ pageContent }) => {
 
     const [isToggled, setIsToggled] = useState(false)
 
@@ -18,7 +19,7 @@ const DashboardLayout = ({ pageContent, sidebarContent, navLinkContent }) => {
     return (
         <div className={!isToggled ? "d-flex" : "d-flex toggled"} id="wrapper">
             {/* Sidebar*/}
-            <Sidebar content={sidebarContent} />
+            <Sidebar content={sidebarLinks} />
             {/* Page content wrapper*/}
             <div id="page-content-wrapper">
                 {/* Top navigation*/}
@@ -45,7 +46,7 @@ const DashboardLayout = ({ pageContent, sidebarContent, navLinkContent }) => {
                 </nav>
                 {/* Page content*/}
                 <div className="container-fluid">
-                    {pageContent}
+                    {pageContent()}
                 </div>
             </div>
         </div>

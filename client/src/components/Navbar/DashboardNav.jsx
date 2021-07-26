@@ -5,7 +5,6 @@ import { removeEverythindAfterLogout } from '../../utils/loginSession';
 const DashboardNav = () => {
     const history = useHistory()
 
-
     const logoutHandler = () => {
         removeEverythindAfterLogout()
         history.push('/login')
@@ -13,7 +12,6 @@ const DashboardNav = () => {
 
     return (
         <>
-
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>
            <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
