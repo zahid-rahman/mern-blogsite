@@ -46,8 +46,8 @@ const LoginPage = () => {
             const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
             setCookie(response.data)
             setUserDetails()
-            history.push('/user/profile')
-            // window.location.href = '/user/profile'
+            // history.push('/user/profile')
+            window.location.href = '/user/profile'
 
         }
         catch (error) {
