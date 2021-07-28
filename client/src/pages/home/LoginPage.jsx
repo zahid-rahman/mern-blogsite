@@ -42,7 +42,8 @@ const LoginPage = () => {
         event.preventDefault()
         try {
             const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
-            setCookie(response.data)
+            console.log(response.data)
+            setCookie(JSON.stringify(response.data))
             setUserDetails()
             window.location.href = '/user/profile'
         }

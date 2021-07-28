@@ -24,7 +24,9 @@ const App = () => {
     dispatch(changeSiteName('ZR blog'))
     const userDetails = getUserDetails()
     // eslint-disable-next-line 
-    dispatch(saveUserDetailsAfterLogin(userDetails))
+    if(userDetails) {
+      dispatch(saveUserDetailsAfterLogin(userDetails))
+    }
   }, []);
 
 
