@@ -38,7 +38,7 @@ const DashboardLayout = ({ pageContent }) => {
                     </div>
                 </nav>
                 {/* Page content*/}
-                <div className="container-fluid">
+                <div className="container-fluid" id="page-content" style={{overflowY:"scroll",height:'900px'}}>
                     {pageContent()}
                 </div>
             </div>
