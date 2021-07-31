@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
             })
         }
     }
-})
+});
 
 router.get('/list', bloggerMiddleware , async (req, res) => {
     try {
