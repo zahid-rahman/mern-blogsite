@@ -8,6 +8,6 @@ export const changeSiteName = (title) => {
 export const saveUserDetailsAfterLogin = (userDetails) => {
     return {
         type: 'SAVE_LOGGEDIN_USER_DETAILS',
-        payload : userDetails
+        payload: userDetails
     }
 }
