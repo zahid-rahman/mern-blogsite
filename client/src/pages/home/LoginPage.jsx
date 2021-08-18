@@ -2,13 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-// import { saveUserDetailsAfterLogin } from '../../actions'
 import PageTitle from '../../components/head-title/PageTitle'
 import { setUserDetails, setCookie } from '../../utils/loginSession'
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API
 
 const LoginPage = () => {
-
     const [userRequest, setUserRequest] = useState({
         email: "",
         password: ""
@@ -44,11 +42,10 @@ const LoginPage = () => {
         event.preventDefault()
         try {
             const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
-            setCookie(response.data)
+            console.log(response.data)
+            setCookie(JSON.stringify(response.data))
             setUserDetails()
-            history.push('/user/profile')
-            // window.location.href = '/user/profile'
-
+            window.location.href = '/user/profile'
         }
         catch (error) {
             console.error(error)
@@ -103,7 +100,6 @@ const LoginPage = () => {
                         <Alert variant="danger" show={alertVisible} className="text-center p-3"><b>wrong email and password</b></Alert>
                         : ""
                     }
-
                 </Col>
             </Row>
         </Container>

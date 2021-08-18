@@ -25,9 +25,7 @@ const Home = () => {
                     </Row>
                 </Container>
 
-
                 <Title titleName="Our blog" />
-
 
                 <Container className="text-center">
                     <Row>
@@ -54,7 +52,6 @@ const Home = () => {
             </>
         )
     }
-
 
     return (
         <div>

@@ -17,6 +17,10 @@ const userSchema = mongoose.Schema({
     nid: {
         type: String
     },
+    posts: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Post'
+    }],
     userType: {
         type: String,
         required: true,

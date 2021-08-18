@@ -13,6 +13,7 @@ import ProfilePage from './pages/user/ProfilePage'
 import PublicRoute from './components/custom-routes/PublicRoute'
 import { saveUserDetailsAfterLogin } from './actions/index'
 import { getUserDetails } from './utils/loginSession'
+import MyPostsPage from './pages/user/MyPostsPage'
 
 const App = () => {
 
@@ -23,7 +24,9 @@ const App = () => {
     dispatch(changeSiteName('ZR blog'))
     const userDetails = getUserDetails()
     // eslint-disable-next-line 
-    dispatch(saveUserDetailsAfterLogin(userDetails))
+    if(userDetails) {
+      dispatch(saveUserDetailsAfterLogin(userDetails))
+    }
   }, []);
 
 
@@ -40,23 +43,16 @@ const App = () => {
             <AboutPage />
           </Route>
 
-
           <Route path="/contact" exact>
             <ContactPage />
           </Route>
 
-          <PublicRoute path="/login" exact component={LoginPage}>
-          </PublicRoute>
+          <PublicRoute path="/login" exact component={LoginPage} />
+          <PublicRoute path="/signup" exact component={SignUpPage} />
 
-          <PublicRoute path="/signup" exact component={SignUpPage}>
-          </PublicRoute>
-
-          <Route path="/post/create">
-            <CreatePostPage></CreatePostPage>
-          </Route>
-
-          <PrivateRoute path="/user/profile" exact component={ProfilePage}>
-          </PrivateRoute>
+          <PrivateRoute path="/post/create" exact component={CreatePostPage} />
+          <PrivateRoute path="/user/profile" exact component={ProfilePage} />
+          <PrivateRoute path="/post/myPost" exact component={MyPostsPage} />
 
         </Switch>
       </BrowserRouter>

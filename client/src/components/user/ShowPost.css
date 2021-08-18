@@ -1,0 +1,13 @@
+#lower-details{
+    display: inline-block;
+    width:100%;
+    list-style: none;
+    padding: 0px;
+}
+
+
+.details-icon {
+    display: inline-block;
+}
+
+

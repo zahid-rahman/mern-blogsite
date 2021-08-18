@@ -3,13 +3,13 @@ import decode from 'jwt-decode'
 
 const { REACT_APP_COOKIE_STRING } = process.env
 
-
 export const setCookie = (token) => {
     cookie.set(REACT_APP_COOKIE_STRING, token)
 }
 
 export const getCookie = () => {
-    return cookie.get(REACT_APP_COOKIE_STRING) || null;
+    console.log(cookie.get(REACT_APP_COOKIE_STRING))
+    return cookie.get(REACT_APP_COOKIE_STRING);
 }
 
 export const removeCookie = () => {
@@ -22,25 +22,26 @@ export const getToken = () => {
         const token = data.accessToken;
         return token;
     }
-    return null;
 }
 
 export const setUserDetails = () => {
+    console.log(getCookie())
     if(getCookie()) {
         const token = getToken();
         const decodeUserData = decode(token);
-        cookie.set('USER_DATA',decodeUserData)
+        cookie.set('USER_DATA',JSON.stringify(decodeUserData))
     }
-    return;
 }
 
 
 export const getUserDetails = () => {
-    if(getCookie()) {
-        const userData = JSON.parse(cookie.get('USER_DATA'));
-        return userData
+    if(getCookie()) {        
+        const userDataCookie = cookie.get('USER_DATA')
+        if(userDataCookie) {
+            const userData = JSON.parse(userDataCookie);
+            return userData
+        }
     } 
-    return null;
 }
 
 export const removeUserDetails = () => {
