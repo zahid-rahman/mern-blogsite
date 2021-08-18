@@ -4,15 +4,21 @@ const bloggerMiddleware = require('../middlewares/bloggerAuthMiddleware');
 const Post = require('./../models/PostModel');
 const User = require('./../models/UserModel')
 const mongoose = require('mongoose');
+const { cloudinary } = require('../utils/cloudinary');
 
 
 router.post('/create', bloggerMiddleware, async (req, res) => {
-    const newPost = new Post({
-        ...req.body,
-        user: req.user._id
-    })
-
     try {
+        const fileStr = req.body.base64EncodedImage;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'dev_setups',
+        });
+        req.body.imagePublicId = uploadResponse.public_id                   ;
+        const newPost = new Post({
+            ...req.body,
+            user: req.user._id
+        })
+
         const post = await newPost.save();
         User.updateOne({
             _id: req.user._id
