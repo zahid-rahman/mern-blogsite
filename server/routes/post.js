@@ -11,7 +11,7 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
     try {
         const fileStr = req.body.base64EncodedImage;
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'dev_setups',
+            upload_preset: process.env.UPLOAD_PRESET,
         });
         req.body.imagePublicId = uploadResponse.public_id                   ;
         const newPost = new Post({
