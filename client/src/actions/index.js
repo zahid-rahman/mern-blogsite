@@ -11,3 +11,11 @@ export const saveUserDetailsAfterLogin = (userDetails) => {
         payload: userDetails
     }
 }
+
+
+export const fetchUserPosts = (userPosts) => {
+    return {
+        type: "FETCH_USER_POST",
+        payload: userPosts
+    }
+}

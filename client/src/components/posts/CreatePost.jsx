@@ -10,15 +10,14 @@ const CreatePost = () => {
         description: '',
         base64EncodedImage: ''
     });
-    const [fileInputState, setFileInputState] = useState('');
-    const [selectedFile, setSelectedFile] = useState('');
+
     const [previewSource, setPreviewSource] = useState('');
     const [alertVisible, setAlertVisible] = useState(false)
     const [statusCode, setStatusCode] = useState(0)
 
     const previewFile = (file) => {
         const reader = new FileReader();
-        if(file && file.type.match('image.*')) {
+        if (file && file.type.match('image.*')) {
             reader.readAsDataURL(file);
             reader.onloadend = () => {
                 setPreviewSource(reader.result);
@@ -37,7 +36,6 @@ const CreatePost = () => {
         setTimeout(() => {
             setAlertVisible(false);
         }, 5000);
-
     }
 
     const createPostHandler = (event) => {
@@ -66,6 +64,7 @@ const CreatePost = () => {
                 headers
             });
             const result = response.data;
+            console.log(response.status)
             setStatusCode(response.status)
             console.log(result);
 
@@ -84,18 +83,24 @@ const CreatePost = () => {
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Control type="text" placeholder="Enter Title"
                                     name="title"
-                                    onChange={createPostHandler} />
+                                    onChange={createPostHandler}
+                                    required
+                                />
                             </Form.Group>
 
                             <Form.Group controlId="formFileLg" className="mb-3">
                                 <Form.Control className="form-control" type="file" size="lg" name="postImage"
-                                    onChange={createPostHandler} />
+                                    onChange={createPostHandler}
+                                    required
+                                />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Control as="textarea" placeholder="Write your post" style={{ height: '200px' }}
                                     name="description"
-                                    onChange={createPostHandler} />
+                                    onChange={createPostHandler}
+                                    required
+                                />
                             </Form.Group>
 
                             <Button variant="dark" type="submit" onClick={showAlert}>

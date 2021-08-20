@@ -8,7 +8,6 @@ export const setCookie = (token) => {
 }
 
 export const getCookie = () => {
-    console.log(cookie.get(REACT_APP_COOKIE_STRING))
     return cookie.get(REACT_APP_COOKIE_STRING);
 }
 
