@@ -18,15 +18,17 @@ const CreatePost = () => {
 
     const previewFile = (file) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setPreviewSource(reader.result);
-            setPostData((previousState) => {
-                return {
-                    ...previousState,
-                    base64EncodedImage: reader.result
-                }
-            })
+        if(file && file.type.match('image.*')) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setPreviewSource(reader.result);
+                setPostData((previousState) => {
+                    return {
+                        ...previousState,
+                        base64EncodedImage: reader.result
+                    }
+                })
+            }
         }
     }
 
@@ -96,13 +98,13 @@ const CreatePost = () => {
                                     onChange={createPostHandler} />
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">
+                            <Button variant="dark" type="submit" onClick={showAlert}>
                                 Submit
                             </Button>
                         </Form>
                         <br />
                         {statusCode === 200 ?
-                            <Alert variant="success" show={alertVisible} className="text-center p-3"><b>User created successfully</b></Alert>
+                            <Alert variant="success" show={alertVisible} className="text-center p-3"><b>Post created successfully</b></Alert>
                             : ""
                         }
 
