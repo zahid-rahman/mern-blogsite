@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Col, Container, Image, Row, Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { saveUserDetailsAfterLogin } from '../../actions'
@@ -10,11 +10,13 @@ import DashboardLayout from '../../components/layout/DashboardLayout'
 import CardContent from '../../components/user/CardContent'
 
 const ProfilePage = () => {
+    const loggedUserDetails = useSelector(state => state.loggedUserDetails);
     const dispatch = useDispatch()
     useEffect(() => {
         const userDetails = getUserDetails()
-        dispatch(saveUserDetailsAfterLogin(userDetails))
-    }, [])
+        dispatch(saveUserDetailsAfterLogin(userDetails));
+        console.log(userDetails);
+    }, []);
 
     const demoCardContent = () => {
         return (
@@ -25,6 +27,8 @@ const ProfilePage = () => {
         )
     }
 
+    console.log('hello')
+
     const profilePageContent = () => {
         return (
             <Container className="p-2">
@@ -32,7 +36,7 @@ const ProfilePage = () => {
                     <Col xl={3} lg={3} md={3} sm={12} xs={12}>
                         <Card body>
                             <Image src={profileImages} rounded fluid className="profile_image"></Image>
-                            <h3 className="profile_name">Zahid rahman</h3>
+                            <h3 className="profile_name">{loggedUserDetails.username}</h3>
                         </Card>
 
                     </Col>

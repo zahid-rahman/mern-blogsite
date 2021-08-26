@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserPosts } from './../../actions/index'
 import {getToken} from '../../utils/loginSession'
+import './MyPosts.css'
 const API_SERVER_URL = process.env.REACT_APP_SERVER_API;
 
 const MyPosts = () => {
@@ -46,11 +47,18 @@ const MyPosts = () => {
     return (
         <>
             <br />
-            {renderPosts}
-            <div className="m-auto w-50 d-block">
-                <button className="btn btn-dark m-auto w-50 d-block" onClick={loadMore}>load more</button>
-            </div>
-            <br />
+            {renderPosts.length <= 0 ?
+                <span className="no-post">No post found</span>
+               :
+              <div>
+                {renderPosts}
+                <div className="m-auto w-50 d-block">
+                    <button className="btn btn-dark m-auto w-50 d-block" onClick={loadMore}>load more</button>
+                </div>
+                <br />
+              </div>
+            }
+
         </>
     )
 }
