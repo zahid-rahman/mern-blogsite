@@ -1,12 +1,13 @@
+import React, { useState } from 'react';
 import axios from 'axios'
-import React, { useState } from 'react'
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import PageTitle from '../../components/head-title/PageTitle'
 import { setUserDetails, setCookie } from '../../utils/loginSession'
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API
 
-const LoginPage = () => {
+const AdminLoginPage = () => {
+
     const [userRequest, setUserRequest] = useState({
         email: "",
         password: ""
@@ -14,18 +15,11 @@ const LoginPage = () => {
     const [error, setError] = useState({});
     const [alertVisible, setAlertVisible] = useState(false)
     const [statusCode, setStatusCode] = useState(0)
-    const history = useHistory()
+    const history = useHistory();
 
     const bigScreenCustomSize = {
         span: 4,
         offset: 4
-    }
-
-    const showAlert = () => {
-        setAlertVisible(true)
-        setTimeout(() => {
-            setAlertVisible(false);
-        }, 6000);
     }
 
     const changeHandler = (event) => {
@@ -37,10 +31,17 @@ const LoginPage = () => {
         })
     }
 
-    const loginSubmitHandler = async (event) => {
+    const showAlert = () => {
+        setAlertVisible(true)
+        setTimeout(() => {
+            setAlertVisible(false);
+        }, 6000);
+    }
+
+    const adminLoginSubmitHandler = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.post(`${SERVER_API_URL}/user/login`, userRequest)
+            const response = await axios.post(`${SERVER_API_URL}/user/admin/login`, userRequest)
             console.log(response.data)
             setCookie(JSON.stringify(response.data))
             setUserDetails()
@@ -61,14 +62,14 @@ const LoginPage = () => {
             <Row>
                 <Col xl={bigScreenCustomSize} lg={bigScreenCustomSize} md={12} sm={12} xs={12}>
                     <h1 className="text-center p-5">
-                        Login
+                        Admin Login
                     </h1>
-                    <Form onSubmit={loginSubmitHandler}>
+                    <Form onSubmit={adminLoginSubmitHandler}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Control
                                 className={email ? "form-control is-invalid" : "form-control"}
                                 name="email"
-                                ype="email"
+                                type="email"
                                 placeholder="Enter email"
                                 onChange={changeHandler}
                             />
@@ -86,12 +87,8 @@ const LoginPage = () => {
                             <p className="invalid-feedback">{password}</p>
 
                         </Form.Group>
-                        <Form.Group className="mb-3 text-center" controlId="formBasicCheckbox">
-                            <Link to='/' className="btn btn-link">back to homepage</Link>
-                            <Link to='/signup' className="btn btn-link">Not registered yet</Link>
-                        </Form.Group>
-                        <Button variant="primary" type="submit" className="w-100" onClick={showAlert}>
-                            Sign Up
+                        <Button variant="danger" type="submit" className="w-100" onClick={showAlert}>
+                            Log In
                         </Button>
                     </Form>
                     <br />
@@ -105,4 +102,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default AdminLoginPage;
