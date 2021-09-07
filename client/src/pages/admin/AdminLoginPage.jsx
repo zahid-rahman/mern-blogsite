@@ -45,7 +45,7 @@ const AdminLoginPage = () => {
             console.log(response.data)
             setCookie(JSON.stringify(response.data))
             setUserDetails()
-            window.location.href = '/user/profile'
+            window.location.href = '/admin/profile'
         }
         catch (error) {
             console.error(error)
