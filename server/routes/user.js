@@ -72,7 +72,6 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
 
 router.post('/admin/login', async (req, res) => {
     const validation = loginValidation(req.body);
-    console.log(validation.isValid)
     if (validation.isValid === false) {
         return res.status(httpStatus.BAD_REQUEST).json(validation.error)
     }

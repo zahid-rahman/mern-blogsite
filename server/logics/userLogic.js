@@ -49,16 +49,16 @@ exports.findAllUser = findAllUser;
 const adminLogin = async (payload) => {
     const admin = await User.findOne({ email: payload.email });
     if (admin && admin !== null && admin.userType === 'admin') {
-        const isValidPassword = await bcrypt.compare(payload.password, user.password)
+        const isValidPassword = await bcrypt.compare(payload.password, admin.password)
         if (!isValidPassword) {
             return Promise.reject('something went wrong')
         }
         else {
             const token = jwt.sign({
-                _id: user._id,
-                email: user.email,
-                userType: user.userType,
-                username: user.username
+                _id: admin._id,
+                email: admin.email,
+                userType: admin.userType,
+                username: admin.username
             }, process.env.JWT_SECRET, {
                 expiresIn: '1h'
             })
