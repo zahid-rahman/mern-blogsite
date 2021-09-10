@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { memo, useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { getCookie, getUserDetails } from '../../utils/loginSession'
 
 const AdminPrivateRoute = ({ component: Component, ...rest }) => {
     const adminDetails = getUserDetails();
+    const isCookie = getCookie() ? true : false
     const adminPrivateRouteFunction = (props) => {
-        if(adminDetails != null) {
-            return getCookie() && adminDetails.userType === 'admin' ? <Component {...props} /> :
-            <Redirect to={{ pathname: '/authentication/login', state: { from: props.location } }} />
+        if(adminDetails != null && adminDetails.userType === 'admin') {
+            if(isCookie) {
+                return <Component {...props} />
+            }
         }
         else {
-            return <Redirect to={{ pathname: '/authentication/login', state: { from: props.location } }} />
+            return <Redirect to={{ pathname: '/unauthorize', state: { from: props.location } }} />
         }
         
     }
+
     return (
         <Route {...rest} render={adminPrivateRouteFunction} />
     );
 }
 
-export default AdminPrivateRoute
+export default memo(AdminPrivateRoute);

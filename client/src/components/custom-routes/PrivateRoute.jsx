@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { getCookie, getUserDetails } from '../../utils/loginSession'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const bloggerDetails = getUserDetails();
+    const adminDetails = getUserDetails();
+    const isCookie = getCookie() ? true : false
     const privateRouteFunction = (props) => {
-        if(bloggerDetails != null) {
-            return getCookie() && bloggerDetails.userType === 'blogger' ? <Component {...props} /> :
-                <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+        if(adminDetails != null && adminDetails.userType === 'blogger') {
+            if(isCookie) {
+                return <Component {...props} />
+            }
         }
         else {
-            return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        }
+            return <Redirect to={{ pathname: '/unauthorize', state: { from: props.location } }} />
+        }    
     }
     return (
         <Route {...rest} render={privateRouteFunction} />
-    )
+    );
 }
 
-export default PrivateRoute
+export default memo(PrivateRoute);
