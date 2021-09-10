@@ -50,5 +50,5 @@ export const removeUserDetails = () => {
 export const removeEverythindAfterLogout = () => {
     removeCookie();
     removeUserDetails();
-    window.location.href = "/login";
+    window.location.href = "/";
 }

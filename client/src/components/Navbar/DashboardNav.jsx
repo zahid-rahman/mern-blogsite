@@ -7,7 +7,7 @@ const DashboardNav = () => {
 
     const logoutHandler = () => {
         removeEverythindAfterLogout()
-        history.push('/login')
+        history.push('/')
     }
 
     return (

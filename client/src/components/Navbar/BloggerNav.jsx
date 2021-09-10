@@ -7,7 +7,7 @@ const BloggerNav = ({ userDetails }) => {
     const history = useHistory()
     const logoutHandler = () => {
         removeEverythindAfterLogout()
-        history.push('/login')
+        history.push('/')
     }
     return (
         <NavDropdown title={userDetails.username} id="basic-nav-dropdown">
