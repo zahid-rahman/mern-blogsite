@@ -3,7 +3,6 @@ import { NavDropdown } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom';
 import { removeEverythindAfterLogout } from '../../utils/loginSession';
 
-
 const AdminNav = ({ userDetails }) => {
     const history = useHistory()
     const logoutHandler = () => {

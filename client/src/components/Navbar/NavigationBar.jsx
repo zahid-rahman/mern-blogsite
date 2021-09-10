@@ -8,20 +8,9 @@ import AdminNav from './AdminNav';
 import BloggerNav from './BloggerNav';
 
 const NavigationBar = () => {
-
     const loggedUserDetails = useSelector(state => state.loggedUserDetails)
     const siteTitle = useSelector(state => state.siteTitle)
     const cookie = getCookie()
-    const history = useHistory()
-    let userType = loggedUserDetails.userType;
-    let renderNav = ""
-    const logoutHandler = () => {
-        removeEverythindAfterLogout()
-        history.push('/login')
-    }
-
-    console.log(loggedUserDetails)
-
     return (
         <Navbar bg="light" expand="lg">
             <Container>
