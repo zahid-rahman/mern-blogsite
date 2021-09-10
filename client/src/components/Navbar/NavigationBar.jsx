@@ -1,9 +1,9 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavigationBar.css'
-import { Link, useHistory } from 'react-router-dom';
-import { getCookie, removeEverythindAfterLogout } from '../../utils/loginSession';
+import { Link } from 'react-router-dom';
+import { getCookie } from '../../utils/loginSession';
 import AdminNav from './AdminNav';
 import BloggerNav from './BloggerNav';
 
