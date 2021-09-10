@@ -19,6 +19,7 @@ import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminPrivateRoute from './components/custom-routes/AdminPrivateRoute'
 import AdminProfilePage from './pages/admin/AdminProfilePage'
 import NotAllowed from './components/custom-routes/NotAllowed'
+import NotFound from './components/custom-routes/404NotFound'
 
 const App = () => {
 
@@ -62,10 +63,7 @@ const App = () => {
           <AdminPrivateRoute path="/admin/profile" exact component={AdminProfilePage} /> 
 
           <Route path="/unauthorize" exact component={NotAllowed} />
-          <Route path="*" render={() => {
-             return <div>404 not found</div>
-          }}/>
-
+          <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>
