@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavigationBar.css'
 import { Link, useHistory } from 'react-router-dom';
 import { getCookie, removeEverythindAfterLogout } from '../../utils/loginSession';
+import AdminNav from './AdminNav';
+import BloggerNav from './BloggerNav';
 
 const NavigationBar = () => {
 
@@ -11,17 +13,18 @@ const NavigationBar = () => {
     const siteTitle = useSelector(state => state.siteTitle)
     const cookie = getCookie()
     const history = useHistory()
-
+    let userType = loggedUserDetails.userType;
+    let renderNav = ""
     const logoutHandler = () => {
         removeEverythindAfterLogout()
         history.push('/login')
     }
 
+    console.log(loggedUserDetails)
 
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-
                 <Link to="/" className="navbar-brand">{siteTitle}</Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -32,25 +35,15 @@ const NavigationBar = () => {
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
-
                     {cookie ?
-                        <NavDropdown title={loggedUserDetails.username} id="basic-nav-dropdown">
-                            <Link to="/user/profile" className="dropdown-item">View profile</Link>
-                            <Link to="/post/create" className="dropdown-item">Create post</Link>
-                            <Link to="/" className="dropdown-item">View all posts</Link>
-                            <Link onClick={logoutHandler} className="dropdown-item"> logout</Link>
-                        </NavDropdown>
-
+                        loggedUserDetails.userType == "blogger" ? <BloggerNav userDetails={loggedUserDetails} /> : <AdminNav userDetails={loggedUserDetails} />
                         :
                         <Nav>
                             <Link to='/signup' className="nav-link">Sign Up</Link>
                             <Link to='/login' className="nav-link">Login</Link>
                         </Nav>
-
                     }
-
                 </Navbar.Collapse>
-
             </Container>
         </Navbar>
     )
