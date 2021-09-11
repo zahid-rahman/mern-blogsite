@@ -1,13 +1,12 @@
 import React from 'react'
 import {  NavDropdown } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { removeEverythindAfterLogout } from '../../utils/loginSession';
 
 const BloggerNav = ({ userDetails }) => {
-    const history = useHistory()
     const logoutHandler = () => {
         removeEverythindAfterLogout()
-        history.push('/')
+        window.location.href = '/'
     }
     return (
         <NavDropdown title={userDetails.username} id="basic-nav-dropdown">
