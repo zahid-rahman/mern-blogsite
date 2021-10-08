@@ -3,14 +3,12 @@ import { Route, Redirect } from 'react-router-dom'
 import { getCookie } from '../../utils/loginSession'
 
 const PublicRoute = ({ component: Component, ...rest }) => {
-
-    const privateRouteFunction = (props) => {
+    const publicRouteFunction = (props) => {
         return !getCookie() ? <Component {...props} /> :
             <Redirect to={{ pathname: '/user/profile', state: { from: props.location } }} />
     }
-
     return (
-        <Route {...rest} render={privateRouteFunction} />
+        <Route {...rest} render={publicRouteFunction} />
     )
 }
 

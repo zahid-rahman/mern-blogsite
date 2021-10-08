@@ -8,7 +8,6 @@ export const setCookie = (token) => {
 }
 
 export const getCookie = () => {
-    console.log(cookie.get(REACT_APP_COOKIE_STRING))
     return cookie.get(REACT_APP_COOKIE_STRING);
 }
 
@@ -51,5 +50,4 @@ export const removeUserDetails = () => {
 export const removeEverythindAfterLogout = () => {
     removeCookie();
     removeUserDetails();
-    window.location.href = "/login";
 }

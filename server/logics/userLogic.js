@@ -11,12 +11,12 @@ const userSignup = async (payload) => {
 
 exports.userSignup = userSignup;
 
-const userLogin = async (payload) => {
+const bloggerLogin = async (payload) => {
     const user = await User.findOne({ email: payload.email });
-    if (user && user !== null) {
+    if (user && user !== null && user.userType === 'blogger') {
         const isValidPassword = await bcrypt.compare(payload.password, user.password)
         if (!isValidPassword) {
-            return Promise.reject('')
+            return Promise.reject('something went wrong')
         }
         else {
             const token = jwt.sign({
@@ -32,11 +32,11 @@ const userLogin = async (payload) => {
         }
     }
     else {
-        return Promise.reject('')
+        return Promise.reject('something went wrong')
     }
 }
 
-exports.userLogin = userLogin;
+exports.bloggerLogin = bloggerLogin;
 
 
 const findAllUser = async () => {
@@ -45,3 +45,29 @@ const findAllUser = async () => {
 }
 
 exports.findAllUser = findAllUser;
+
+const adminLogin = async (payload) => {
+    const admin = await User.findOne({ email: payload.email });
+    if (admin && admin !== null && admin.userType === 'admin') {
+        const isValidPassword = await bcrypt.compare(payload.password, admin.password)
+        if (!isValidPassword) {
+            return Promise.reject('something went wrong')
+        }
+        else {
+            const token = jwt.sign({
+                _id: admin._id,
+                email: admin.email,
+                userType: admin.userType,
+                username: admin.username
+            }, process.env.JWT_SECRET, {
+                expiresIn: '1h'
+            })
+            return Promise.resolve(`Bearer ${token}`)
+        }
+    }
+    else {
+        return Promise.reject('something went wrong')
+    }
+}
+
+exports.adminLogin = adminLogin;

@@ -1,10 +1,12 @@
 import siteTitle from "./siteTitleReducer"
-import {saveUserDetailsReducer as loggedUserDetails} from './userReducers'
 import { combineReducers } from 'redux'
+import {saveUserDetailsReducer as loggedUserDetails} from './userReducers'
+import {fetchUserPostsReducer as userPosts} from './postReducers'
 
 const reducers = combineReducers({
     siteTitle,
-    loggedUserDetails
+    loggedUserDetails,
+    userPosts
 })
 
 export default reducers

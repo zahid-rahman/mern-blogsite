@@ -11,9 +11,15 @@ import SignUpPage from './pages/home/SignUpPage'
 import PrivateRoute from './components/custom-routes/PrivateRoute'
 import ProfilePage from './pages/user/ProfilePage'
 import PublicRoute from './components/custom-routes/PublicRoute'
+import AdminPublicRoute from './components/custom-routes/AdminPublicRoute'
 import { saveUserDetailsAfterLogin } from './actions/index'
 import { getUserDetails } from './utils/loginSession'
 import MyPostsPage from './pages/user/MyPostsPage'
+import AdminLoginPage from './pages/admin/AdminLoginPage'
+import AdminPrivateRoute from './components/custom-routes/AdminPrivateRoute'
+import AdminProfilePage from './pages/admin/AdminProfilePage'
+import NotAllowed from './components/custom-routes/NotAllowed'
+import NotFound from './components/custom-routes/404NotFound'
 
 const App = () => {
 
@@ -49,11 +55,15 @@ const App = () => {
 
           <PublicRoute path="/login" exact component={LoginPage} />
           <PublicRoute path="/signup" exact component={SignUpPage} />
+          <AdminPublicRoute path="/authentication/login" exact component={AdminLoginPage} />
 
           <PrivateRoute path="/post/create" exact component={CreatePostPage} />
           <PrivateRoute path="/user/profile" exact component={ProfilePage} />
           <PrivateRoute path="/post/myPost" exact component={MyPostsPage} />
+          <AdminPrivateRoute path="/admin/profile" exact component={AdminProfilePage} /> 
 
+          <Route path="/unauthorize" exact component={NotAllowed} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>

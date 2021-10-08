@@ -10,4 +10,10 @@
     display: inline-block;
 }
 
+#description {
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+}
+
 

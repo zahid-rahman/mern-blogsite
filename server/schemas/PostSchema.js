@@ -5,13 +5,16 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    body: {
+    description : {
         type: String,
         required: true
     },
     user: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
+    },
+    imagePublicId: {
+        type: String,
     },
     date: {
         type: Date,

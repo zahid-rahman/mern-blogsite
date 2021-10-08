@@ -42,7 +42,7 @@ router.post('/login', async (req, res) => {
     }
     else if (validation.isValid === true) {
         try {
-            const token = await userLogic.userLogin(req.body)
+            const token = await userLogic.bloggerLogin(req.body)
             res.status(httpStatus.OK).json({
                 "accessToken": token,
                 "message": "Login successfull"
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/list', bloggerMiddleware , async (req, res) => {
+router.get('/list', bloggerMiddleware, async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
         res.status(httpStatus.OK).json(users)
@@ -67,6 +67,28 @@ router.get('/list', bloggerMiddleware , async (req, res) => {
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
         })
+    }
+})
+
+router.post('/admin/login', async (req, res) => {
+    const validation = loginValidation(req.body);
+    if (validation.isValid === false) {
+        return res.status(httpStatus.BAD_REQUEST).json(validation.error)
+    }
+    else if (validation.isValid === true) {
+        try {
+            const token = await userLogic.adminLogin(req.body)
+            res.status(httpStatus.OK).json({
+                "accessToken": token,
+                "message": "Admin Login successfull"
+            })
+        }
+        catch (error) {
+            console.error(error);
+            res.status(httpStatus.UNAUTHORIZED).json({
+                message: "Authentication failed !!"
+            })
+        }
     }
 })
 
