@@ -1,0 +1,18 @@
+[
+    {
+        "linkTitle": "Manage Dashboard",
+        "link" : "/admin/dashboard"
+    } ,
+    {
+        "linkTitle": "Manage Profile",
+        "link" : "/admin/profile"
+    },
+    {
+        "linkTitle": "View Blogger",
+        "link" : "/post/create"
+    },
+    {
+        "linkTitle": "View Posts",
+        "link" : "/post/myPost"
+    }
+]

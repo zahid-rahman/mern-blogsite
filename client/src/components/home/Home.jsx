@@ -7,8 +7,6 @@ import Title from '../title/Title'
 import SiteLayout from '../layout/SiteLayout'
 
 const Home = () => {
-
-
     const renderHomePageDesign = () => {
         return (
             <>
@@ -16,20 +14,18 @@ const Home = () => {
 
                 <Title titleName="All Posts" />
 
-                <Container className="m-5">
-                    <Row>
-                        <Col lg={2}>
+                <Container className="mt-2 text-center">
+                    <Row className="text-center">
+                        <Col xl={2}>
                             <CategorySidebar></CategorySidebar>
                         </Col>
-                        <Col lg={10}>
+                        <Col xl={10}>
                             <Posts totalPosts={6}></Posts>
                         </Col>
                     </Row>
                 </Container>
 
-
                 <Title titleName="Our blog" />
-
 
                 <Container className="text-center">
                     <Row>
@@ -56,7 +52,6 @@ const Home = () => {
             </>
         )
     }
-
 
     return (
         <div>

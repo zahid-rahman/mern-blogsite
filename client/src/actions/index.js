@@ -4,3 +4,18 @@ export const changeSiteName = (title) => {
         payload: title
     }
 }
+
+export const saveUserDetailsAfterLogin = (userDetails) => {
+    return {
+        type: 'SAVE_LOGGEDIN_USER_DETAILS',
+        payload: userDetails
+    }
+}
+
+
+export const fetchUserPosts = (userPosts) => {
+    return {
+        type: "FETCH_USER_POST",
+        payload: userPosts
+    }
+}
