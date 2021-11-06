@@ -13,7 +13,7 @@ const MyPosts = () => {
     const [visibleProduct, setVisibleProduct] = useState(4)
     const dispatch = useDispatch();
 
-    const getUserPostDetails = async () => {
+    const getUserPostsDetails = async () => {
         const response = await axios({
             method: 'GET',
             url: `${API_SERVER_URL}/post/list`,
@@ -32,7 +32,7 @@ const MyPosts = () => {
     }
 
     useEffect(() => {
-        getUserPostDetails()
+        getUserPostsDetails()
     }, []);
 
     const renderPosts = userPosts.slice(0,visibleProduct).map((post) => {

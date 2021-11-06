@@ -15,5 +15,9 @@
     height: 3em;
     overflow: hidden;
 }
+#post-body {
+    padding: 0px 6mm;
+    /* width: 100%; */
+}
 
 
