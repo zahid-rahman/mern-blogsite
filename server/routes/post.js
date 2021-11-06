@@ -48,7 +48,7 @@ router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
         const post = await Post.findOne({
             _id: postId,
             user
-        })
+        }).populate('user')
 
         res.status(httpStatus.OK).json(post)
     }
