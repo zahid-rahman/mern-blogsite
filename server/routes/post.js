@@ -79,4 +79,18 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
     }
 })
 
+router.get('/listV2', async (req, res) => {
+    try {
+        const postsForPublicSite = await Post.find({})
+        .populate('user')
+        res.status(httpStatus.OK).json(postsForPublicSite) 
+    } 
+    catch (error) {
+        console.error(error)
+        res.status(httpStatus.UNAUTHORIZED).json({
+            message: "Authentication failed !!"
+        })
+    }  
+})
+
 module.exports = router;

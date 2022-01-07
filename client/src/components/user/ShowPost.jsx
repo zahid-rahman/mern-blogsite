@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import { Image } from 'cloudinary-react'
+import { Link } from 'react-router-dom'
 import './ShowPost.css'
 
 const ShowPost = ({ post }) => {
@@ -25,7 +26,7 @@ const ShowPost = ({ post }) => {
                             <p id="description" className="mt-3">
                                 {post.description}
                             </p>
-                            <a className="btn btn-dark" href={postLink}>view more</a>
+                            <Link className="btn btn-dark" to={postLink}>view more</Link>
                         </div>
                     </Card.Body>
                 </Col>
