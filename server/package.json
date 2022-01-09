@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -23,6 +24,10 @@
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "supertest": "^6.1.6",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }

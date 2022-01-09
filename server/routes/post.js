@@ -86,7 +86,7 @@ router.get('/listV2', async (req, res) => {
         res.status(httpStatus.OK).json(postsForPublicSite) 
     } 
     catch (error) {
-        console.error(error)
+        console.error(error);
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
         })
