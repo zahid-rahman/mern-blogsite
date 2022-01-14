@@ -1,14 +1,20 @@
-import { Image } from 'react-bootstrap'
+import { Image } from 'cloudinary-react'
 import blogImage from '../../images/blog-image.jpeg'
 
-const Post = () => {
+const Post = (details) => {
+    console.log(details.post.title)
     return (
         <div className="text-center">
             <a href="#">
-                <Image src={blogImage} fluid />
+            <Image
+                    cloudName="zskart"
+                    height="250"
+                    width="350"
+                    publicId={details.post.imagePublicId}
+                    crop="scale"
+                />
             </a>
-            <h3 className="p-3">Title 1</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In accusamus numquam magni vitae accusantium ex quam explicabo quaerat velit perferendis.</p>
+            <h3 className="p-3">{details.post.title}</h3>
             <br />
         </div>
     )

@@ -15,6 +15,7 @@ import AdminPublicRoute from './components/custom-routes/AdminPublicRoute'
 import { saveUserDetailsAfterLogin } from './actions/index'
 import { getUserDetails } from './utils/loginSession'
 import MyPostsPage from './pages/user/MyPostsPage'
+import PostPage from './pages/user/PostPage'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminPrivateRoute from './components/custom-routes/AdminPrivateRoute'
 import AdminProfilePage from './pages/admin/AdminProfilePage'
@@ -60,6 +61,7 @@ const App = () => {
           <PrivateRoute path="/post/create" exact component={CreatePostPage} />
           <PrivateRoute path="/user/profile" exact component={ProfilePage} />
           <PrivateRoute path="/post/myPost" exact component={MyPostsPage} />
+          <PrivateRoute path="/post/:postId" exact component={PostPage} />
           <AdminPrivateRoute path="/admin/profile" exact component={AdminProfilePage} /> 
 
           <Route path="/unauthorize" exact component={NotAllowed} />

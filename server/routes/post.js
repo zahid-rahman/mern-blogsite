@@ -48,7 +48,7 @@ router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
         const post = await Post.findOne({
             _id: postId,
             user
-        })
+        }).populate('user')
 
         res.status(httpStatus.OK).json(post)
     }
@@ -77,6 +77,20 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
             message: "Authentication failed !!"
         })
     }
+})
+
+router.get('/listV2', async (req, res) => {
+    try {
+        const postsForPublicSite = await Post.find({})
+        .populate('user')
+        res.status(httpStatus.OK).json(postsForPublicSite) 
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(httpStatus.UNAUTHORIZED).json({
+            message: "Authentication failed !!"
+        })
+    }  
 })
 
 module.exports = router;

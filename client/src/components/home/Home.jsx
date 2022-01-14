@@ -1,3 +1,5 @@
+import {useState, useEffect} from 'react'
+import axios from 'axios'
 import { Row, Col, Container } from 'react-bootstrap'
 import Banner from '../Banner/Banner'
 import bannerImage from '../../images/blog-banner.jpg'
@@ -5,9 +7,40 @@ import CategorySidebar from '../categorySidebar/CategorySidebar'
 import Posts from '../posts/Posts'
 import Title from '../title/Title'
 import SiteLayout from '../layout/SiteLayout'
+import { getToken } from '../../utils/loginSession'
+const API_SERVER_URL = process.env.REACT_APP_SERVER_API
 
 const Home = () => {
+
+    const [posts, setPosts] = useState([]);
+
+    const getAllPosts = async () => {
+        try {
+            const response = await axios({
+                method: 'GET',
+                url: `${API_SERVER_URL}/post/listV2`,
+                headers:{
+                    Authorization: getToken()
+                }
+            });
+            setPosts(response.data)
+        }
+        catch(error) {
+            console.error(error)
+        }
+    }
+
+   
+
+
+
+
+    useEffect(() => {
+        getAllPosts();
+    }, []);
+
     const renderHomePageDesign = () => {
+        console.log(posts)
         return (
             <>
                 <Banner image={bannerImage}></Banner>
@@ -20,7 +53,7 @@ const Home = () => {
                             <CategorySidebar></CategorySidebar>
                         </Col>
                         <Col xl={10}>
-                            <Posts totalPosts={6}></Posts>
+                            <Posts posts={posts}></Posts>
                         </Col>
                     </Row>
                 </Container>
