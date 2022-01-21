@@ -2,10 +2,11 @@ const router = require('express').Router();
 const httpStatus = require('http-status')
 const bloggerMiddleware = require('../middlewares/bloggerAuthMiddleware');
 const Post = require('./../models/PostModel');
-const User = require('./../models/UserModel')
+const User = require('./../models/UserModel');
 const mongoose = require('mongoose');
 const { cloudinary } = require('../utils/cloudinary');
 const loggerMessage = require('./../utils/loggerMessage');
+const adminMiddleware = require('../middlewares/adminAuthMiddleware');
 
 // CREATE POST API (BLOGGER)
 router.post('/create', bloggerMiddleware, async (req, res) => {
@@ -14,7 +15,7 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: process.env.UPLOAD_PRESET,
         });
-        req.body.imagePublicId = uploadResponse.public_id                   ;
+        req.body.imagePublicId = uploadResponse.public_id ;                ;
         const newPost = new Post({
             ...req.body,
             user: req.user._id
@@ -30,7 +31,7 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
         });
 
         res.status(httpStatus.OK).json({
-            message: "Post created successfully"
+            message: "Post created successfully",
         });
     }
     catch (error) {
@@ -95,6 +96,14 @@ router.get('/listV2', async (req, res) => {
             message: "Authentication failed !!"
         })
     }  
+});
+
+router.get('/activePosts', adminMiddleware, (req, res) => {
+    res.json('under construction');
+});
+
+router.get('/activePosts', adminMiddleware, (req, res) => {
+    res.json('under construction');
 });
 
 module.exports = router;

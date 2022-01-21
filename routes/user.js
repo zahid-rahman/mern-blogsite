@@ -5,6 +5,7 @@ const loginValidation = require('./../validation/loginValidation');
 const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
 const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware');
+const adminMiddleware = require('./../middlewares/adminAuthMiddleware');
 const loggerMiddleware = require('./../middlewares/loggerMiddleware');
 const loggerMessage = require('./../utils/loggerMessage');
 
@@ -104,7 +105,7 @@ router.post('/admin/login', async (req, res) => {
 
 
 // TOTAL ACTIVE USER COUNT API
-router.get('/activeUserCount', async (req, res) => {
+router.get('/activeUserCount', adminMiddleware, async (req, res) => {
     try {
         const activeUser = await userLogic.activeUserCount();
         loggerMessage(activeUser, 'debug');
@@ -117,7 +118,7 @@ router.get('/activeUserCount', async (req, res) => {
 });
 
 // TOTAL INACTIVE USER COUNT API
-router.get('/inactiveUserCount', async (req, res) => {
+router.get('/inactiveUserCount', adminMiddleware, async (req, res) => {
     try {
         const inactiveUser = await userLogic.inactiveUserCount();
         loggerMessage(inactiveUser, 'debug');
