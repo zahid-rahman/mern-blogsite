@@ -5,9 +5,9 @@ const Post = require('./../models/PostModel');
 const User = require('./../models/UserModel')
 const mongoose = require('mongoose');
 const { cloudinary } = require('../utils/cloudinary');
-const loggerMiddleware = require('./../middlewares/loggerMiddleware');
 const loggerMessage = require('./../utils/loggerMessage');
 
+// CREATE POST API (BLOGGER)
 router.post('/create', bloggerMiddleware, async (req, res) => {
     try {
         const fileStr = req.body.base64EncodedImage;
@@ -41,6 +41,8 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
     }
 });
 
+
+// FIND A SINGLE POST API (BY POSTID)
 router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
     const { postId } = req.params;
     const user = mongoose.Types.ObjectId(req.user._id)
@@ -58,8 +60,9 @@ router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
             message: "Authentication failed !!"
         });
     }
-})
+});
 
+// FIND ALL POST API (BLOGGER)
 router.get('/list', bloggerMiddleware, async (req, res) => {
     const user = mongoose.Types.ObjectId(req.user._id)
     try {
@@ -78,6 +81,7 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
     }
 })
 
+// FIND ALL EXPOSED/PUBLIC POSTS
 router.get('/listV2', async (req, res) => {
     try {
         const postsForPublicSite = await Post.find({})
@@ -91,6 +95,6 @@ router.get('/listV2', async (req, res) => {
             message: "Authentication failed !!"
         })
     }  
-})
+});
 
 module.exports = router;

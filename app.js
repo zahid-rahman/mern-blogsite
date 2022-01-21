@@ -32,7 +32,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-mongoose.connect(DATABASE_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(DATABASE_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

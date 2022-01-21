@@ -1,7 +1,8 @@
 const User = require('../models/UserModel');
 const httpStatus = require('http-status');
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const loggerMessage = require('./../utils/loggerMessage');
 
 const userSignup = async (payload) => {
     const newUser = new User(payload);
@@ -71,3 +72,45 @@ const adminLogin = async (payload) => {
 }
 
 exports.adminLogin = adminLogin;
+
+const activeUserCount = async () => {
+    const response = await User.find({
+        status: 'active',
+        userType: 'blogger'
+    });
+
+    loggerMessage(response, 'debug');
+    if(response) {
+        const count = response.length;
+        return Promise.resolve({
+            response,
+            count
+        });
+    }
+    else {
+        return Promise.reject(response);
+    }
+}
+
+exports.activeUserCount = activeUserCount;
+
+const inactiveUserCount = async () => {
+    const response = await User.find({
+        status: 'inactive',
+        userType: 'blogger'
+    });
+
+    if(response) {
+        const count = response.length;
+        return Promise.resolve({
+            response,
+            count
+        });
+    }
+    else {
+        return Promise.reject(response);
+    }
+}
+
+exports.inactiveUserCount = inactiveUserCount;
+

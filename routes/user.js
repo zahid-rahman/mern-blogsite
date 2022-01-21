@@ -8,7 +8,7 @@ const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware');
 const loggerMiddleware = require('./../middlewares/loggerMiddleware');
 const loggerMessage = require('./../utils/loggerMessage');
 
-
+// USER SIGNUP API
 router.post('/signup', async (req, res) => {
 
     const validation = signupValidation(req.body);
@@ -39,6 +39,7 @@ router.post('/signup', async (req, res) => {
     }
 })
 
+// USER LOGIN API
 router.post('/login', async (req, res) => {
 
     const validation = loginValidation(req.body);
@@ -63,6 +64,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// STILL CONFUSED ABOUT THIS API (NEED TO CHECK)
 router.get('/list', bloggerMiddleware, async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
@@ -74,8 +76,10 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
             message: "Authentication failed !!"
         })
     }
-})
+});
 
+
+// ADMIN LOGIN API
 router.post('/admin/login', async (req, res) => {
     const validation = loginValidation(req.body);
     if (validation.isValid === false) {
@@ -95,6 +99,33 @@ router.post('/admin/login', async (req, res) => {
                 message: "Authentication failed !!"
             })
         }
+    }
+});
+
+
+// TOTAL ACTIVE USER COUNT API
+router.get('/activeUserCount', async (req, res) => {
+    try {
+        const activeUser = await userLogic.activeUserCount();
+        loggerMessage(activeUser, 'debug');
+        res.status(httpStatus.OK).json(activeUser.count);
+    }
+    catch (error) {
+        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
+    }
+});
+
+// TOTAL INACTIVE USER COUNT API
+router.get('/inactiveUserCount', async (req, res) => {
+    try {
+        const inactiveUser = await userLogic.inactiveUserCount();
+        loggerMessage(inactiveUser, 'debug');
+        res.status(httpStatus.OK).json(inactiveUser.count);
+    }
+    catch (error) {
+        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR});
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
 })
 
