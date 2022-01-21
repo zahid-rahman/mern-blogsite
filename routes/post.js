@@ -5,7 +5,8 @@ const Post = require('./../models/PostModel');
 const User = require('./../models/UserModel')
 const mongoose = require('mongoose');
 const { cloudinary } = require('../utils/cloudinary');
-
+const loggerMiddleware = require('./../middlewares/loggerMiddleware');
+const loggerMessage = require('./../utils/loggerMessage');
 
 router.post('/create', bloggerMiddleware, async (req, res) => {
     try {
@@ -17,7 +18,7 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
         const newPost = new Post({
             ...req.body,
             user: req.user._id
-        })
+        });
 
         const post = await newPost.save();
         User.updateOne({
@@ -26,24 +27,23 @@ router.post('/create', bloggerMiddleware, async (req, res) => {
             $push: {
                 posts: post._id
             }
-        })
+        });
 
         res.status(httpStatus.OK).json({
             message: "Post created successfully"
-        })
+        });
     }
     catch (error) {
-        console.error(error);
+        loggerMessage(error, 'error');
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
-        })
+        });
     }
 });
 
 router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
     const { postId } = req.params;
     const user = mongoose.Types.ObjectId(req.user._id)
-    console.log(user)
     try {
         const post = await Post.findOne({
             _id: postId,
@@ -53,13 +53,11 @@ router.get('/find/:postId', bloggerMiddleware, async (req, res) => {
         res.status(httpStatus.OK).json(post)
     }
     catch (error) {
-        console.error(error);
+        loggerMessage(error, 'error');
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
-        })
+        });
     }
-
-
 })
 
 router.get('/list', bloggerMiddleware, async (req, res) => {
@@ -68,11 +66,12 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
         const posts = await Post.find({
             user
         }).populate("user")
+        .sort({date: -1})
 
         res.status(httpStatus.OK).json(posts)
     }
     catch (error) {
-        console.error(error);
+        loggerMessage(error, 'error');
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
         })
@@ -82,11 +81,12 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
 router.get('/listV2', async (req, res) => {
     try {
         const postsForPublicSite = await Post.find({})
-        .populate('user')
+        .populate('user');
+
         res.status(httpStatus.OK).json(postsForPublicSite) 
     } 
     catch (error) {
-        console.error(error);
+        loggerMessage(error, 'error');  
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
         })

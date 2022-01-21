@@ -4,8 +4,10 @@ const signupValidation = require('./../validation/signupValidation');
 const loginValidation = require('./../validation/loginValidation');
 const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
+const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware');
+const loggerMiddleware = require('./../middlewares/loggerMiddleware');
+const loggerMessage = require('./../utils/loggerMessage');
 
-const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware')
 
 router.post('/signup', async (req, res) => {
 
@@ -25,7 +27,11 @@ router.post('/signup', async (req, res) => {
             })
         }
         catch (error) {
-            console.error(error)
+            console.error(error);
+            loggerMiddleware.log({
+                message: error,
+                level: 'error'
+            });
             res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
                 message: "Something went wrong"
             })
