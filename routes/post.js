@@ -98,12 +98,36 @@ router.get('/listV2', async (req, res) => {
     }  
 });
 
-router.get('/activePosts', adminMiddleware, (req, res) => {
-    res.json('under construction');
+// TOTAL ACTIVE USER COUNT API
+router.get('/activePostCount', adminMiddleware, async (req, res) => {
+    try {
+        const response = await Post.find({
+            status: 'active',
+        });
+        
+        const activePostCount = response.length;
+        loggerMessage({response,count: activePostCount}, 'debug');
+        res.status(httpStatus.OK).json(activePostCount);
+    }
+    catch (error) {
+        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
+    }
 });
 
-router.get('/activePosts', adminMiddleware, (req, res) => {
-    res.json('under construction');
+// TOTAL INACTIVE USER COUNT API
+router.get('/pendingPostCount', adminMiddleware, async (req, res) => {
+    try {
+        const response = await Post.find({
+            status: 'pending',
+        });
+        const pendingPostCount = response.length;
+        loggerMessage({response,count: pendingPostCount}, 'debug');
+        res.status(httpStatus.OK).json(pendingPostCount);
+    }
+    catch (error) {
+        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
+    }
 });
-
 module.exports = router;

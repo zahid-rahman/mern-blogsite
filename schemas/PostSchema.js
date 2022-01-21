@@ -9,6 +9,12 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        required: true,
+        enum: ['active', 'pending'],
+        default: 'pending'
+    },
     user: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
