@@ -109,10 +109,7 @@ router.get('/activeUserCount', adminMiddleware, async (req, res) => {
     try {
         const activeUser = await userLogic.activeUserCount();
         loggerMessage(activeUser, 'debug');
-        res.status(httpStatus.OK).json({
-            statusCode: httpStatus.OK,
-            count: activeUser.count
-        });
+        res.status(httpStatus.OK).json(activeUser.count);
     }
     catch (error) {
         loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
