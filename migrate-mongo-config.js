@@ -3,10 +3,10 @@
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url: "mongodb://localhost:27017/blog",
+    url: process.env.CONNECTION_STRING,
 
     // TODO Change this to your database name:
-    databaseName: "blog",
+    databaseName: process.env.DATABASE_NAME,
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
