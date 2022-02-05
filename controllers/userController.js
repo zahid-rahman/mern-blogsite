@@ -31,7 +31,7 @@ const bloggerSignup = async (req, res) => {
     }
 }
 
-const userListForAdmin = async (req, res) => {
+const getUserListForAdmin = async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
         res.status(httpStatus.OK).json(users);
@@ -94,7 +94,7 @@ const adminLogin = async (req, res) => {
     }
 }
 
-const activeUserCount = async (req, res) => {
+const getActiveUserCount = async (req, res) => {
     try {
         const activeUser = await userLogic.activeUserCount();
         loggerMessage(activeUser, 'debug');
@@ -106,7 +106,7 @@ const activeUserCount = async (req, res) => {
     }
 }
 
-const inactiveUserCount = async (req, res) => {
+const getInactiveUserCount = async (req, res) => {
     try {
         const inactiveUser = await userLogic.inactiveUserCount();
         loggerMessage(inactiveUser, 'debug');
@@ -120,9 +120,9 @@ const inactiveUserCount = async (req, res) => {
 
 module.exports = {
     bloggerSignup,
-    userListForAdmin,
+    getUserListForAdmin,
     adminLogin,
-    activeUserCount,
+    getActiveUserCount,
     bloggerLogin,
-    inactiveUserCount
+    getInactiveUserCount
 }

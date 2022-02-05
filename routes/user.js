@@ -12,12 +12,12 @@ router.post('/login', userController.bloggerLogin);
 router.post('/admin/login', userController.adminLogin);
 
 // TOTAL ACTIVE USER COUNT API
-router.get('/activeUserCount', adminMiddleware, userController.activeUserCount);
+router.get('/activeUserCount', adminMiddleware, userController.getActiveUserCount);
 
 // USER LIST API FOR ADMIN
-router.get('/list', adminMiddleware, userController.userListForAdmin);
+router.get('/list', adminMiddleware, userController.getUserListForAdmin);
 
 // TOTAL INACTIVE USER COUNT API
-router.get('/inactiveUserCount', adminMiddleware, userController.inactiveUserCount);
+router.get('/inactiveUserCount', adminMiddleware, userController.getInactiveUserCount);
 
 module.exports = router;
