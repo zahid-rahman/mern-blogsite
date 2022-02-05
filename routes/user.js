@@ -6,7 +6,6 @@ const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
 const bloggerMiddleware = require('./../middlewares/bloggerAuthMiddleware');
 const adminMiddleware = require('./../middlewares/adminAuthMiddleware');
-const loggerMiddleware = require('./../middlewares/loggerMiddleware');
 const loggerMessage = require('./../utils/loggerMessage');
 
 // USER SIGNUP API
@@ -28,11 +27,7 @@ router.post('/signup', async (req, res) => {
             })
         }
         catch (error) {
-            console.error(error);
-            loggerMiddleware.log({
-                message: error,
-                level: 'error'
-            });
+            loggerMessage(error, 'error')
             res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
                 message: "Something went wrong"
             })
@@ -42,40 +37,42 @@ router.post('/signup', async (req, res) => {
 
 // USER LOGIN API
 router.post('/login', async (req, res) => {
-
     const validation = loginValidation(req.body);
-    console.log(validation.isValid)
     if (validation.isValid === false) {
         return res.status(httpStatus.BAD_REQUEST).json(validation.error)
     }
     else if (validation.isValid === true) {
         try {
-            const token = await userLogic.bloggerLogin(req.body)
+            const token = await userLogic.bloggerLogin(req.body);
+            const tokenOnly = token.split(" ");
             res.status(httpStatus.OK).json({
-                "accessToken": token,
-                "message": "Login successfull"
-            })
+                "message": "Login successfull",
+                "accessTokenWithBearer": token,
+                "tokenOnly": tokenOnly[1]
+            });
         }
         catch (error) {
-            console.error(error);
-            res.status(httpStatus.UNAUTHORIZED).json({
-                message: "Authentication failed !!"
-            })
+            loggerMessage(error, 'error');
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+                message: "Authentication failed !!",
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                errorMessage: error.message
+            });
         }
     }
 });
 
-// STILL CONFUSED ABOUT THIS API (NEED TO CHECK)
-router.get('/list', bloggerMiddleware, async (req, res) => {
+// USER LIST API FOR ADMIN
+router.get('/list', adminMiddleware, async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
-        res.status(httpStatus.OK).json(users)
+        res.status(httpStatus.OK).json(users);
     }
     catch (error) {
-        console.error(error);
-        res.status(httpStatus.UNAUTHORIZED).json({
-            message: "Authentication failed !!"
-        })
+        loggerMessage(error, 'error');
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: "Something went wrong"
+        });
     }
 });
 
@@ -84,21 +81,23 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
 router.post('/admin/login', async (req, res) => {
     const validation = loginValidation(req.body);
     if (validation.isValid === false) {
-        return res.status(httpStatus.BAD_REQUEST).json(validation.error)
+        return res.status(httpStatus.BAD_REQUEST).json(validation.error);
     }
     else if (validation.isValid === true) {
         try {
-            const token = await userLogic.adminLogin(req.body)
+            const token = await userLogic.adminLogin(req.body);
+            const tokenOnly = token.split(" ");
             res.status(httpStatus.OK).json({
-                "accessToken": token,
-                "message": "Admin Login successfull"
-            })
+                "message": "Login successfull",
+                "accessTokenWithBearer": token,
+                "tokenOnly": tokenOnly[1]
+            });
         }
         catch (error) {
-            console.error(error);
+            loggerMessage(error, 'error');
             res.status(httpStatus.UNAUTHORIZED).json({
                 message: "Authentication failed !!"
-            })
+            });
         }
     }
 });

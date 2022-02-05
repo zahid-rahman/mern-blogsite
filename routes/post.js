@@ -85,7 +85,9 @@ router.get('/list', bloggerMiddleware, async (req, res) => {
 // FIND ALL EXPOSED/PUBLIC POSTS
 router.get('/listV2', async (req, res) => {
     try {
-        const postsForPublicSite = await Post.find({})
+        const postsForPublicSite = await Post.find({
+            status: "active"
+        })
         .populate('user');
 
         res.status(httpStatus.OK).json(postsForPublicSite) 
