@@ -44,11 +44,11 @@ router.post('/login', async (req, res) => {
     else if (validation.isValid === true) {
         try {
             const token = await userLogic.bloggerLogin(req.body);
-            const tokenOnly = token.slice(7, -1);
+            const tokenOnly = token.split(" ");
             res.status(httpStatus.OK).json({
                 "message": "Login successfull",
                 "accessTokenWithBearer": token,
-                "tokenOnly": tokenOnly
+                "tokenOnly": tokenOnly[1]
             });
         }
         catch (error) {
@@ -86,11 +86,11 @@ router.post('/admin/login', async (req, res) => {
     else if (validation.isValid === true) {
         try {
             const token = await userLogic.adminLogin(req.body);
-            const tokenOnly = token.slice(7, -1);
+            const tokenOnly = token.split(" ");
             res.status(httpStatus.OK).json({
                 "message": "Login successfull",
                 "accessTokenWithBearer": token,
-                "tokenOnly": tokenOnly
+                "tokenOnly": tokenOnly[1]
             });
         }
         catch (error) {
