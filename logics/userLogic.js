@@ -47,7 +47,7 @@ exports.bloggerLogin = bloggerLogin;
 
 
 const findAllUser = async () => {
-    const users = await User.find()
+    const users = await User.find({ userType: 'blogger' })
     return users;
 }
 

@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
 });
 
 // STILL CONFUSED ABOUT THIS API (NEED TO CHECK)
-router.get('/list', bloggerMiddleware, async (req, res) => {
+router.get('/list', adminMiddleware, async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
         res.status(httpStatus.OK).json(users);
