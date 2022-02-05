@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// STILL CONFUSED ABOUT THIS API (NEED TO CHECK)
+// USER LIST API FOR ADMIN
 router.get('/list', adminMiddleware, async (req, res) => {
     try {
         const users = await userLogic.findAllUser();
