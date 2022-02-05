@@ -109,7 +109,6 @@ const getActivePostCount = async (req, res) => {
     }
 }
 
-
 const getPendingPostCount = async (req, res) => {
     try {
         const response = await Post.find({
@@ -124,8 +123,6 @@ const getPendingPostCount = async (req, res) => {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
 }
-
-
 
 module.exports = {
     createPost,
