@@ -1,12 +1,12 @@
 // In this file you can configure migrate-mongo
-
+const dbConfig = require('./utils/databaseConnection');
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url: process.env.CONNECTION_STRING,
+    url: dbConfig.connectionString,
 
     // TODO Change this to your database name:
-    databaseName: process.env.DATABASE_NAME,
+    databaseName: dbConfig.databaseName,
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
