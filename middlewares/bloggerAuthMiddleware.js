@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         }
         if (!user || user.userType !== 'blogger') {
             return res.status(httpStatus.UNAUTHORIZED).json({
-                error: "Authorization failed !!"
+                error: "Authorization required !!"
             })
         }
         req.user = user

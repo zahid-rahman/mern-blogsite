@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         }
         if (!user || user.userType !== 'admin') {
             return res.status(httpStatus.UNAUTHORIZED).json({
-                error: "Authorization failed !!"
+                error: "Admin authorization required !!"
             })
         }
         req.user = user
