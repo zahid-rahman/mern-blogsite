@@ -12,7 +12,7 @@ const createPost = async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: process.env.UPLOAD_PRESET,
         });
-        req.body.imagePublicId = uploadResponse.public_id ;                ;
+        req.body.imagePublicId = uploadResponse.public_id;;
         const newPost = new Post({
             ...req.body,
             user: req.user._id
@@ -64,7 +64,7 @@ const findBloggerPosts = async (req, res) => {
         const posts = await Post.find({
             user
         }).populate("user")
-        .sort({date: -1})
+            .sort({ date: -1 })
 
         res.status(httpStatus.OK).json(posts)
     }
@@ -81,16 +81,16 @@ const findActivePosts = async (req, res) => {
         const postsForPublicSite = await Post.find({
             status: "active"
         })
-        .populate('user');
+            .populate('user');
 
-        res.status(httpStatus.OK).json(postsForPublicSite) 
-    } 
+        res.status(httpStatus.OK).json(postsForPublicSite)
+    }
     catch (error) {
-        loggerMessage(error, 'error');  
+        loggerMessage(error, 'error');
         res.status(httpStatus.UNAUTHORIZED).json({
             message: "Authentication failed !!"
         })
-    }  
+    }
 }
 
 const getActivePostCount = async (req, res) => {
@@ -98,13 +98,13 @@ const getActivePostCount = async (req, res) => {
         const response = await Post.find({
             status: 'active',
         });
-        
+
         const activePostCount = response.length;
-        loggerMessage({response,count: activePostCount}, 'debug');
+        loggerMessage({ response, count: activePostCount }, 'debug');
         res.status(httpStatus.OK).json(activePostCount);
     }
     catch (error) {
-        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
+        loggerMessage({ errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR }, 'error');
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
 }
@@ -115,12 +115,27 @@ const getPendingPostCount = async (req, res) => {
             status: 'pending',
         });
         const pendingPostCount = response.length;
-        loggerMessage({response,count: pendingPostCount}, 'debug');
+        loggerMessage({ response, count: pendingPostCount }, 'debug');
         res.status(httpStatus.OK).json(pendingPostCount);
     }
     catch (error) {
-        loggerMessage({errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR}, 'error');
+        loggerMessage({ errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR }, 'error');
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error)
+    }
+}
+
+const getBloggerPostsForAdmin = async (req, res) => {
+    try {
+        const result = await Post.find();
+        res.status(httpStatus.OK).json(result)
+    }
+    catch (error) {
+        loggerMessage({ errorMessage: error, statusCode: httpStatus.INTERNAL_SERVER_ERROR }, 'error');
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: "Authentication failed !!",
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            errorMessage: error.message
+        })
     }
 }
 
@@ -130,5 +145,6 @@ module.exports = {
     findBloggerPosts,
     findActivePosts,
     getActivePostCount,
-    getPendingPostCount
+    getPendingPostCount,
+    getBloggerPostsForAdmin
 }
