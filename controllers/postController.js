@@ -126,7 +126,8 @@ const getPendingPostCount = async (req, res) => {
 
 const getBloggerPostsForAdmin = async (req, res) => {
     try {
-        const result = await Post.find();
+        const result = await Post.find()
+        .populate('user');;
         res.status(httpStatus.OK).json(result)
     }
     catch (error) {
