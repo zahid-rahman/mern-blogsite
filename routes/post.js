@@ -12,6 +12,9 @@ router.get('/find/:postId', bloggerMiddleware, postController.findPostById);
 // FIND ALL POST API (BLOGGER)
 router.get('/list', bloggerMiddleware, postController.findBloggerPosts);
 
+// FIND ALL POST FOR ADMIN 
+router.get('/allPosts', adminMiddleware, postController.getBloggerPostsForAdmin)
+
 // FIND ALL EXPOSED/PUBLIC POSTS
 router.get('/listV2', postController.findActivePosts);
 
